@@ -8,9 +8,9 @@ exports.register = async (req, res) => {
 
   try {
 
-    const { username, email, password, isAdmin } = req.body;
+    const { name, email, password, isAdmin } = req.body;
     // console.log(name,email,password,isAdmin);
-    const name = username;
+
     console.log('sign up data: ', req.body);
     // console.log("hiii")
 
@@ -19,6 +19,13 @@ exports.register = async (req, res) => {
         success: false,
         message: "Please enter name,email and password!",
       });
+    }
+    if (password.length < 8) {
+      return res.status(400).json({
+        success: false,
+        message: "Password must be at least 8 characters long.",
+      });
+
     }
 
     const user = await User.findOne({ email, isAdmin });
@@ -53,7 +60,7 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
 
-    // console.log(req.body);
+  // console.log(req.body);
 
   console.log('login data: ', req.body);
   try {
@@ -88,7 +95,7 @@ exports.login = async (req, res) => {
         token,
         user: user,
       });
-      
+
     } else {
       return res.status(401).json({
         success: false,

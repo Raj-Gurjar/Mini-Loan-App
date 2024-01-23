@@ -1,66 +1,96 @@
-// Requests.js (Admin Panel)
 import React, { useState, useEffect } from 'react';
 import './requests.scss';
 
-const Requests = () => {
+const Request = () => {
   const [loanRequests, setLoanRequests] = useState([]);
+  const [actionTaken, setActionTaken] = useState({});
 
-  // Fetch loan requests from the API
+  const authToken = localStorage.getItem('token');
+
   useEffect(() => {
-    // Fetch data from your API endpoint for loan requests
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:4000/api/admin/loan-requests');
-        const data = await response.json();
-        setLoanRequests(data);
-      } catch (error) {
-        console.error('Error fetching loan requests:', error);
-      }
-    };
-
-    fetchData();
+    fetchLoanRequests();
   }, []);
 
-  // Placeholder function to handle loan approval
-  const handleApprove = (requestId) => {
-    // Call your backend API to update the loan status to 'APPROVED'
-    console.log(`Loan with ID ${requestId} approved`);
+  const fetchLoanRequests = async () => {
+    try {
+      const response = await fetch('http://localhost:4000/api/loan/allLoans', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`,
+        },
+      });
+
+      const data = await response.json();
+      console.log(data.loans);
+      setLoanRequests(data.loans || []);
+    } catch (error) {
+      console.error('Error fetching loan requests:', error);
+    }
   };
 
-  // Placeholder function to handle loan rejection
-  const handleReject = (requestId) => {
-    // Call your backend API to update the loan status to 'REJECTED'
-    console.log(`Loan with ID ${requestId} rejected`);
+  const handleStatusChange = async (loanId, newStatus) => {
+    console.log(loanId, newStatus);
+    try {
+      const response = await fetch('http://localhost:4000/api/loan/update', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`,
+        },
+        body: JSON.stringify({ loanId, state: newStatus }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Request failed with status: ${response.status}`);
+      }
+
+      // Assuming the API sends back updated loan requests after status change
+      const data = await response.json();
+      console.log("data front ", data);
+      fetchLoanRequests();
+
+
+    } catch (error) {
+      console.error('Error updating loan status:', error);
+    }
   };
 
   return (
-    <div className="loan-requests-container">
-      <h2 className="requests-heading">Admin Panel</h2>
-      <h3 className="requests-heading">Loan Requests</h3>
+    <div className="request-container">
+      <h2 className="request-heading">Loan Requests</h2>
 
-      <table className="requests-table">
+      <table className="request-table">
         <thead>
           <tr>
-            <th>Customer Name</th>
-            <th>Amount</th>
+            <th>User Name</th>
+            <th>Email</th>
+            <th>Loan Amount</th>
             <th>Term</th>
-            <th>Scheduled Repayments</th>
             <th>Status</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
           {loanRequests.map((request) => (
-            <tr key={request.id}>
-              <td>{request.customerName}</td>
+            <tr key={request._id}>
+              <td>{request.userId.name}</td>
+              <td>{request.userId.email}</td>
               <td>${request.amount}</td>
               <td>{request.term} weeks</td>
-              <td>{request.scheduledRepayments.join(', ')}</td>
-              <td>{request.status}</td>
+              <td>{actionTaken[request._id] || request.state}</td>
               <td>
-                {/* Add action buttons for admin, e.g., approve/reject */}
-                <button onClick={() => handleApprove(request.id)}>Approve</button>
-                <button onClick={() => handleReject(request.id)}>Reject</button>
+                {(request.state === "PENDING") ? (
+                  <>
+                    <button onClick={() => handleStatusChange(request._id, 'APPROVED')}>
+                      Approve
+                    </button>
+                    <button onClick={() => handleStatusChange(request._id, 'REJECTED')}>
+                      Reject
+                    </button>
+                  </>
+                ) : <button disabled>Done</button>}
+
               </td>
             </tr>
           ))}
@@ -70,4 +100,4 @@ const Requests = () => {
   );
 };
 
-export default Requests;
+export default Request;

@@ -2,25 +2,32 @@
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import './signup.scss';
+import './log.scss';
 import { Link } from 'react-router-dom';
+import Loader from '../Loader/Loader'; // Import the Loader component
 
 export default function SignUp({ setIsLoggedIn, userType }) {
-
-  console.log('usert', userType);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    username: '',
+    name: '',
     email: '',
     password: '',
     isAdmin: userType,
   });
-  console.log(formData);
+  const [isLoading, setIsLoading] = useState(false); // Add isLoading state
+
   async function signUpHandler(event) {
     event.preventDefault(); // Prevents the default form submission behavior
 
+    // Password length validation
+    if (formData.password.length < 8) {
+      toast.error('Password must be at least 8 characters long.');
+      return;
+    }
+
     try {
-      // Make a POST request to your backend signup endpoint
+      setIsLoading(true); // Set isLoading to true when signing up
+
       const response = await fetch('http://localhost:4000/api/user/signup', {
         method: 'POST',
         headers: {
@@ -30,22 +37,28 @@ export default function SignUp({ setIsLoggedIn, userType }) {
       });
 
       if (response.ok) {
-        // If signup is successful, set the user as logged in
+        const res_data = await response.json();
+        console.log("res from server", res_data);
+
         setIsLoggedIn(true);
         toast.success('Account Created Successfully 😊');
-        navigate(userType ? '/admin/dashboard':'/cust/dashboard');
+        navigate(userType ? '/admin/dashboard' : '/cust/dashboard');
       } else {
-        // If signup fails, handle the error
         const errorMessage = await response.json();
         toast.error(`Signup failed: ${errorMessage.message}`);
       }
     } catch (error) {
       console.error('Error during signup:', error);
+    } finally {
+      setIsLoading(false); // Set isLoading to false when signup is complete or fails
     }
   }
 
   function changeHandler(event) {
     const { name, value, checked, type } = event.target;
+
+    // Add password length validation
+   
 
     setFormData((prevFormData) => {
       return {
@@ -56,39 +69,18 @@ export default function SignUp({ setIsLoggedIn, userType }) {
   }
 
   return (
-    <div className="signup-container">
+    <div className="log-container">
       <h2>Sign Up</h2>
 
-      <form className="signup-form" onSubmit={signUpHandler}>
+      <form className="log-form" onSubmit={signUpHandler}>
         <h4>Sign Up as {(userType === true) ? 'Admin' : 'Customer'}</h4>
-
-        {/* <label>
-          <input
-            type="radio"
-            value="customer"
-            name="userType"
-            checked={!formData.isAdmin}
-            onChange={() => setFormData((prev) => ({ ...prev, isAdmin: false }))}
-          />
-          Customer
-        </label>
-        <label>
-          <input
-            type="radio"
-            value="admin"
-            name="userType"
-            checked={formData.isAdmin}
-            onChange={() => setFormData((prev) => ({ ...prev, isAdmin: true }))}
-          />
-          Admin
-        </label> */}
 
         <label htmlFor="username">Username:</label>
         <input
           type="text"
           id="username"
-          name="username"
-          value={formData.username}
+          name="name"
+          value={formData.name}
           onChange={changeHandler}
           required
         />
@@ -114,10 +106,19 @@ export default function SignUp({ setIsLoggedIn, userType }) {
         />
 
         <button type="submit">Sign Up</button>
-      </form>
 
-      <div><h4>Already Signed Up?</h4>
-      <Link to='/login'>Login as {userType ? 'Admin': 'Customer'}</Link></div>
+        {/* Show the loader if isLoading is true */}
+        {isLoading && (
+          <div className="loader-container">
+            <Loader />
+          </div>
+        )}
+
+        <div>
+          <h4>Already Signed Up?</h4>
+          <Link to='/login'><button>Login as {userType ? 'Admin' : 'Customer'}</button></Link>
+        </div>
+      </form>
     </div>
   );
 }

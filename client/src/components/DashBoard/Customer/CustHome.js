@@ -12,7 +12,7 @@ const CustHome = () => {
       </Link>
 
       <Link to="/cust/dashboard/viewloan">
-        <button className="dashboard-button">View Old Loans</button>
+        <button className="dashboard-button">View All Loans</button>
       </Link>
 
       <div className="terms-and-conditions">

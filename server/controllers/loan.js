@@ -5,8 +5,7 @@ const calculatePayments = (loan, payments) => {
   const { _id } = loan;
   const scheduledPayments = [];
 
-  for (let i = 0; i < payments.length; i++) 
-  {
+  for (let i = 0; i < payments.length; i++) {
     const payment = new Payment({
       loanId: _id,
       amount: payments[i].amount,
@@ -24,6 +23,7 @@ exports.createLoan = async (req, res) => {
   try {
     const { userId, amount, term, payments } = req.body;
     const user = req.user;
+    console.log(payments);
 
     if (user.isAdmin) {
       return res.status(401).json({
@@ -191,8 +191,11 @@ exports.updateState = async (req, res) => {
     }
 
     loan.state = state;
-    await loan.save();
+    console.log("state bk",state);
 
+
+    await loan.save();
+    console.log("loanbk",loan);
     return res.status(200).json({
       success: true,
       message: "Loan state updated successfully!",

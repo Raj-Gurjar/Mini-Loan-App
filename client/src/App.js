@@ -13,6 +13,7 @@ import CustHome from './components/DashBoard/Customer/CustHome';
 // import CustHome from './components/DashBoard/Customer/CustHome';
 import CustReq from './components/DashBoard/Customer/ReqLoan'
 import CustView from './components/DashBoard/Customer/ViewLoan';
+import PayLoan from './components/DashBoard/Customer/PayLoan';
 
 import { useState } from 'react';
 
@@ -41,6 +42,7 @@ function App() {
                 <Route path='/cust/dashboard' element={<CustHome/>} />
                 <Route path='/cust/dashboard/reqloan' element={<CustReq/>} />
                 <Route path='/cust/dashboard/viewloan' element={<CustView/>} />
+                <Route path='/cust/dashboard/payloan' element={<PayLoan/>} />
 
                 <Route path='*' element={<div>404 Site Not found</div>} />
                 {/* //! This is the wildcard route that matches any path that hasn't been matched by the previous routes. */}

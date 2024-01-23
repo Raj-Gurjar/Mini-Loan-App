@@ -1,80 +1,103 @@
 import React, { useState } from 'react';
 import './dashboard.scss';
 import toast from 'react-hot-toast';
+import Loader from '../../Loader/Loader'; // Import the Loader component
+import { useNavigate } from 'react-router-dom';
+
 
 const ReqLoan = () => {
+
+  const navigate = useNavigate();
   const [loanAmount, setLoanAmount] = useState('');
   const [term, setTerm] = useState('');
   const [installments, setInstallments] = useState([]);
   const [showPayments, setShowPayments] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false); // State for loader
 
   const calculateInstallments = () => {
     if (!loanAmount || !term) {
-      setErrorMessage('Please enter loan amount and term.');
+      toast.error('Please enter loan amount and term.');
       return;
     }
 
-    const loanAmountFloat = parseFloat(loanAmount);
-    const termInt = parseInt(term);
+    setLoading(true); // Show loader when starting the calculation
 
-    if (termInt > loanAmountFloat) {
-      setErrorMessage('Number of installments cannot be greater than the loan amount.');
-      return;
-    }
+    // Your actual calculation logic here
+    setTimeout(() => {
+      // Replace this with your actual calculation logic
+      const loanAmountFloat = parseFloat(loanAmount);
+      const termInt = parseInt(term);
 
-    const weeklyInstallment = Math.floor(loanAmountFloat / termInt);
-    const remainingAmount = loanAmountFloat - weeklyInstallment * termInt;
-    const currentDate = new Date();
-    const installmentsData = [];
+      const weeklyInstallment = Math.floor(loanAmountFloat / termInt);
+      const remainingAmount = loanAmountFloat - weeklyInstallment * termInt;
+      const currentDate = new Date();
+      const installmentsData = [];
 
-    for (let i = 1; i <= termInt; i++) {
-      const installment = {
-        date: new Date(currentDate.getTime() + i * 7 * 24 * 60 * 60 * 1000),
-        amount: (weeklyInstallment + (i <= remainingAmount ? 1 : 0)).toFixed(2),
-      };
-      installmentsData.push(installment);
-    }
+      for (let i = 1; i <= termInt; i++) {
+        const installment = {
+          date: new Date(currentDate.getTime() + i * 7 * 24 * 60 * 60 * 1000),
+          amount: (weeklyInstallment + (i <= remainingAmount ? 1 : 0)).toFixed(2),
+        };
+        installmentsData.push(installment);
+      }
 
-    setInstallments(installmentsData);
-    setShowPayments(true);
-    setErrorMessage('');
+      setInstallments(installmentsData);
+      setShowPayments(true);
+      setErrorMessage('');
+      setLoading(false); // Hide loader after the calculation
+    }, 2000); // You can adjust the timeout based on your actual logic
   };
 
   const sendLoanApplication = async () => {
-    if (!loanAmount || !term || installments.length === 0) {
-      setErrorMessage('Please calculate installments before applying.');
+    setLoading(true);
+
+    if (!loanAmount || !term) {
+      toast.error('Please enter loan amount and term.');
+      setLoading(false);
       return;
     }
+
+    if (loanAmount && term && installments.length === 0) {
+      toast.error('Please calculate installments before applying.');
+      setLoading(false);
+      return;
+    }
+
+    const authToken = localStorage.getItem('token');
+    const User = localStorage.getItem('user');
+    const user = JSON.parse(User);
 
     try {
       const response = await fetch('http://localhost:4000/api/loan/createLoan', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`,
         },
         body: JSON.stringify({
-          // userId:user._id
           amount: loanAmount,
           term,
           payments: installments,
-          
+          userId: user._id,
         }),
       });
 
-      const data = await response.json();
+      // Handle the response as needed
+      toast.success('Loan Request is Created');
 
-      if (response.ok) {
-        setErrorMessage('');
-        // You can handle success here, e.g., show a success message
-        console.log('Loan application submitted successfully:', data);
-        toast.success('Loan Request Has submitted Successfully');
-      } else {
-        setErrorMessage(`Error: ${data.message}`);
-      }
+      // Clear input fields and reset state
+      setLoanAmount('');
+      setTerm('');
+      setInstallments([]);
+      setShowPayments(false);
+      navigate('/cust/dashboard');
+
     } catch (error) {
       console.error('Error submitting loan application:', error);
       setErrorMessage('An error occurred while submitting the loan application.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -88,13 +111,17 @@ const ReqLoan = () => {
 
   return (
     <div className="loan-container">
+      {/* Display loader when loading is true */}
+
       <div className="loan-form">
+        
         <label htmlFor="loanAmount">Loan Amount</label>
         <input
           type="number"
           id="loanAmount"
           value={loanAmount}
           onChange={(e) => setLoanAmount(e.target.value)}
+          required
         />
 
         <label htmlFor="term">Term (in weeks)</label>
@@ -103,6 +130,7 @@ const ReqLoan = () => {
           id="term"
           value={term}
           onChange={(e) => setTerm(e.target.value)}
+          required
         />
 
         <div className='btn-cntrn'>
@@ -116,6 +144,7 @@ const ReqLoan = () => {
 
       <div className="payments-container">
         <h2>Scheduled Payments</h2>
+        {loading && <Loader />}
         {showPayments ? (
           <div className="installments-list">
             <ul>
@@ -125,9 +154,11 @@ const ReqLoan = () => {
                 </li>
               ))}
             </ul>
+           
           </div>
         ) : (
           <p>No payments scheduled yet.</p>
+          
         )}
       </div>
     </div>

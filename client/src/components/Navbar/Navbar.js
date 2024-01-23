@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 // import logo from '../path/to/your/logo.png'; // replace with the actual path to your logo
 import './navbar.scss';
 
-const Navbar = ({ isLoggedIn, setIsLoggedIn,setUserType,userType }) => {
+const Navbar = ({ isLoggedIn, setIsLoggedIn, setUserType, userType }) => {
     const [menuOpen, setMenuOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -15,10 +15,11 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn,setUserType,userType }) => {
     return (
         <nav>
             <div className="nav">
-                <div className="logo">
-                    {/* <img src={logo} alt="Logo" /> */}
-                    Logo
-                </div>
+                <Link to='/'>
+                    <div className="logo">
+                      Mini-Loan
+                    </div>
+                </Link>
                 <div className={`menu-toggle ${menuOpen ? 'open' : ''}`} onClick={toggleMenu}>
                     <div className="bar1"></div>
                     <div className="bar2"></div>
@@ -62,7 +63,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn,setUserType,userType }) => {
                                 }}>
                                     <button>Logout</button>
                                 </Link>
-                                <Link to={userType ?'admin/dashboard' : 'cust/dashboard'} onClick={() => setMenuOpen(false)}>
+                                <Link to={userType ? 'admin/dashboard' : 'cust/dashboard'} onClick={() => setMenuOpen(false)}>
                                     <button>DashBoard</button>
                                 </Link>
                             </>
