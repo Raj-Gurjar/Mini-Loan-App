@@ -3,20 +3,25 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import './signup.scss';
+import { Link } from 'react-router-dom';
 
 export default function SignUp({ setIsLoggedIn, userType }) {
+
+  console.log('usert', userType);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     password: '',
-    isAdmin: false,
+    isAdmin: userType,
   });
+  console.log(formData);
+  async function signUpHandler(event) {
+    event.preventDefault(); // Prevents the default form submission behavior
 
-  async function signUpHandler() {
     try {
       // Make a POST request to your backend signup endpoint
-      const response = await fetch('/api/signup', {
+      const response = await fetch('http://localhost:4000/api/user/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -28,9 +33,8 @@ export default function SignUp({ setIsLoggedIn, userType }) {
         // If signup is successful, set the user as logged in
         setIsLoggedIn(true);
         toast.success('Account Created Successfully 😊');
-        navigate('/dashboard');
-      } 
-      else {
+        navigate(userType ? '/admin/dashboard':'/cust/dashboard');
+      } else {
         // If signup fails, handle the error
         const errorMessage = await response.json();
         toast.error(`Signup failed: ${errorMessage.message}`);
@@ -56,9 +60,9 @@ export default function SignUp({ setIsLoggedIn, userType }) {
       <h2>Sign Up</h2>
 
       <form className="signup-form" onSubmit={signUpHandler}>
-        <h4>Sign Up as {userType}</h4>
+        <h4>Sign Up as {(userType === true) ? 'Admin' : 'Customer'}</h4>
 
-        <label>
+        {/* <label>
           <input
             type="radio"
             value="customer"
@@ -77,7 +81,7 @@ export default function SignUp({ setIsLoggedIn, userType }) {
             onChange={() => setFormData((prev) => ({ ...prev, isAdmin: true }))}
           />
           Admin
-        </label>
+        </label> */}
 
         <label htmlFor="username">Username:</label>
         <input
@@ -86,6 +90,7 @@ export default function SignUp({ setIsLoggedIn, userType }) {
           name="username"
           value={formData.username}
           onChange={changeHandler}
+          required
         />
 
         <label htmlFor="email">Email:</label>
@@ -95,6 +100,7 @@ export default function SignUp({ setIsLoggedIn, userType }) {
           name="email"
           value={formData.email}
           onChange={changeHandler}
+          required
         />
 
         <label htmlFor="password">Password:</label>
@@ -104,10 +110,14 @@ export default function SignUp({ setIsLoggedIn, userType }) {
           name="password"
           value={formData.password}
           onChange={changeHandler}
+          required
         />
 
         <button type="submit">Sign Up</button>
       </form>
+
+      <div><h4>Already Signed Up?</h4>
+      <Link to='/login'>Login as {userType ? 'Admin': 'Customer'}</Link></div>
     </div>
   );
 }

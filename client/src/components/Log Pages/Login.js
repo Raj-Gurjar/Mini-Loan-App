@@ -9,37 +9,32 @@ export default function Login({ setIsLoggedIn, userType }) {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
+    isAdmin: userType
   });
-
+  console.log(formData);
   async function loginHandler() {
     try {
-      // Make a POST request to your backend login endpoint
-      const response = await fetch('/api/login', {
+      // Make a POST request to your backend signup endpoint
+      const response = await fetch('http://localhost:4000/api/user/signin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          ...formData,
-          userType,
-        }),
+        body: JSON.stringify(formData),
       });
-      console.log(response);
-      
 
       if (response.ok) {
-        // If login is successful, set the user as logged in
+        // If signup is successful, set the user as logged in
         setIsLoggedIn(true);
-        toast.success('Logged In 😊');
-        navigate('/dashboard');
+        toast.success('LoggedIn Successfully 😊');
+        navigate(userType ? '/admin/dashboard':'/cust/dashboard');
       } else {
-        // If login fails, handle the error
-        const errorMessage = await response.text();
-        toast.error(`Login failed`);
-
+        // If signup fails, handle the error
+        const errorMessage = await response.json();
+        toast.error(`Login failed: ${errorMessage.message}`);
       }
     } catch (error) {
-      console.error('Error during login:', error);
+      console.error('Error during Login:', error);
     }
   }
 
@@ -57,7 +52,7 @@ export default function Login({ setIsLoggedIn, userType }) {
       <h2>Login</h2>
 
       <div className="login-form">
-        <h4>Login as {userType}</h4>
+        <h4>Login as {(userType === true) ? 'Admin' : 'Customer'}</h4>
 
         <label htmlFor="email">Email:</label>
         <input
@@ -66,6 +61,7 @@ export default function Login({ setIsLoggedIn, userType }) {
           name="email"
           value={formData.email}
           onChange={changeHandler}
+          required
         />
 
         <label htmlFor="password">Password:</label>
@@ -75,6 +71,7 @@ export default function Login({ setIsLoggedIn, userType }) {
           name="password"
           value={formData.password}
           onChange={changeHandler}
+          required
         />
 
         <button onClick={loginHandler}>Log in</button>
@@ -82,7 +79,7 @@ export default function Login({ setIsLoggedIn, userType }) {
         <h4>Not Registered Yet?</h4>
 
         <Link to="/signup">
-          <button>SignUp</button>
+          <button>SignUp as {(userType === true) ? 'Admin' : 'Customer'}</button>
         </Link>
       </div>
     </div>

@@ -5,16 +5,11 @@ import toast from 'react-hot-toast';
 // import logo from '../path/to/your/logo.png'; // replace with the actual path to your logo
 import './navbar.scss';
 
-const Navbar = ({ isLoggedIn, setIsLoggedIn,setUserType }) => {
+const Navbar = ({ isLoggedIn, setIsLoggedIn,setUserType,userType }) => {
     const [menuOpen, setMenuOpen] = useState(false);
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
-    };
-
-    const handleLogin = (userType) => {
-        // You can perform any additional logic here before navigating to the login page
-        setUserType(userType);
     };
 
     return (
@@ -33,7 +28,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn,setUserType }) => {
                     <div>
                         <ul>
                             <li>
-                                <NavLink to='/' exact onClick={() => setMenuOpen(false)}>Home</NavLink>
+                                <NavLink to='/' onClick={() => setMenuOpen(false)}>Home</NavLink>
                             </li>
                             <li>
                                 <NavLink to='/about' onClick={() => setMenuOpen(false)}>About</NavLink>
@@ -48,11 +43,11 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn,setUserType }) => {
                             <>
                                 {!isLoggedIn &&
                                     <>
-                                        <Link to='/login' onClick={() => { handleLogin('customer'); setMenuOpen(false); }}>
-                                            <button>Customer</button>
+                                        <Link to='/login' onClick={() => { setUserType(false); setMenuOpen(false); }}>
+                                            <button>Customer Login</button>
                                         </Link>
-                                        <Link to='/login' onClick={() => { handleLogin('admin'); setMenuOpen(false); }}>
-                                            <button>Admin</button>
+                                        <Link to='/login' onClick={() => { setUserType(true); setMenuOpen(false); }}>
+                                            <button>Admin Login</button>
                                         </Link>
                                     </>
                                 }
@@ -67,7 +62,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn,setUserType }) => {
                                 }}>
                                     <button>Logout</button>
                                 </Link>
-                                <Link to='/dashboard' onClick={() => setMenuOpen(false)}>
+                                <Link to={userType ?'admin/dashboard' : 'cust/dashboard'} onClick={() => setMenuOpen(false)}>
                                     <button>DashBoard</button>
                                 </Link>
                             </>
