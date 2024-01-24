@@ -1,7 +1,6 @@
 //!------------------ Customer DashBoard--------------------
 .customer-dashboard {
-  // max-width: 600px;
-  // margin: auto;
+
   padding-top: 100px;
   text-align: center;
   padding: 20px;
@@ -15,11 +14,6 @@
 }
 
 .cust-btn-cntnr {
-  // display: flex;
-  // justify-content: center;
-  // flex-direction: column;
-  // align-items: center;
-  // gap: 10px;
 
   .dashboard-button {
     display: block;
@@ -59,7 +53,7 @@
 //! ----------------Loan Request----------------------------
 
 .loan-container {
-  // height: 100vh;
+
   display: flex;
   flex-direction: row;
   padding-top: 100px;
@@ -68,7 +62,7 @@
 
   .loan-form,
   .payments-container {
-    // max-width: 70%;
+
     border: 1px solid #36b3eb;
     padding: 20px;
     color: black;
@@ -181,7 +175,7 @@
 //!----------------Pay Loans ----------------
 
 .payloan {
-  // Your overall styling for the PayLoan component
+  
   padding-top: 70px;
   justify-content: center;
   text-align: center;
@@ -212,7 +206,7 @@
   }
 
   .modal-container {
-    // position: relative;
+
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;

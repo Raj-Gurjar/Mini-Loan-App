@@ -26,7 +26,7 @@ const Request = () => {
       });
 
       const data = await response.json();
-      console.log(data.loans);
+      // console.log(data.loans);
       setLoanRequests(data.loans || []);
       setLoading(false);
     } catch (error) {
@@ -35,7 +35,7 @@ const Request = () => {
   };
 
   const handleStatusChange = async (loanId, newStatus) => {
-    console.log(loanId, newStatus);
+    // console.log(loanId, newStatus);
     try {
       setLoading(true);
       const response = await fetch('http://localhost:4000/api/loan/update', {
@@ -51,9 +51,8 @@ const Request = () => {
         throw new Error(`Request failed with status: ${response.status}`);
       }
 
-      // Assuming the API sends back updated loan requests after status change
       const data = await response.json();
-      console.log("data front ", data);
+      // console.log("data front ", data);
       fetchLoanRequests();
       toast.success("Loan Updated Successfully");
 

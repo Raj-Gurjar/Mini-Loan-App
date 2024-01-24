@@ -1,10 +1,9 @@
-// Login.js
+
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate, Link } from 'react-router-dom';
 import './log.scss';
 
-// import { useAuth } from '../Store/Auth';
 import Loader from '../Loader/Loader';
 
 export default function Login({ isLoggedIn, setIsLoggedIn, userType, userId, setUserId }) {
@@ -19,7 +18,7 @@ export default function Login({ isLoggedIn, setIsLoggedIn, userType, userId, set
   });
   const [isLoading, setIsLoading] = useState(false);
 
-  // const { storeTokenInLS } = useAuth();
+
 
   async function loginHandler() {
     try {
@@ -41,12 +40,7 @@ export default function Login({ isLoggedIn, setIsLoggedIn, userType, userId, set
         localStorage.setItem("token", res_data.token);
         localStorage.setItem("user", JSON.stringify(res_data.user));
 
-
-
         setIsLoggedIn(true);
-
-
-
 
         toast.success('Logged In Successfully 😊');
        
@@ -92,7 +86,6 @@ export default function Login({ isLoggedIn, setIsLoggedIn, userType, userId, set
 
         <button onClick={loginHandler}>Log in</button>
 
-        {/* Show the loader if isLoading is true */}
         {isLoading && (
           <div className="loader-container">
             <Loader />

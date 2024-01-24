@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './customer.scss';
-import toast from 'react-hot-toast';
+
 import { useNavigate } from 'react-router-dom';
-import PayLoan from './PayLoan';
+
 import Loader from '../../Loader/Loader';
 
 const ViewLoan = () => {

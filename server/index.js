@@ -18,5 +18,5 @@ app.listen(PORT, () => {
   console.log("Server is listening on port " + PORT);
 });
 
-const dbConnect = require("./config/mongoose");
+const dbConnect = require("./config/database");
 dbConnect();

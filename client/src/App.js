@@ -1,18 +1,17 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.scss';
+
 import Home from './Pages/Home';
 import About from './Pages/About';
 import Navbar from './components/Navbar/Navbar';
-
 import Login from './components/Log Pages/Login';
 import SignUp from './components/Log Pages/SignUp';
-
 import AdminHome from './components/DashBoard/Admin/Requests';
 import CustHome from './components/DashBoard/Customer/CustHome';
-// import CustHome from './components/DashBoard/Customer/CustHome';
 import CustReq from './components/DashBoard/Customer/ReqLoan'
 import CustView from './components/DashBoard/Customer/ViewLoan';
 import PayLoan from './components/DashBoard/Customer/PayLoan';
+
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -31,7 +30,6 @@ function App() {
     useEffect(() => {
         AOS.init({
             duration: 1000, 
-            // easing: 'ease-in-sine',
         });
     }, []);
 

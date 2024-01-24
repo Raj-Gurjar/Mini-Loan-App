@@ -1,5 +1,5 @@
-const Loan = require("../models/loan");
-const Payment = require("../models/payment");
+const Loan = require("../models/loan.model");
+const Payment = require("../models/payment.model");
 
 const calculatePayments = (loan, payments) => {
   const { _id } = loan;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './customer.scss';
 import toast from 'react-hot-toast';
-import Loader from '../../Loader/Loader'; // Import the Loader component
+import Loader from '../../Loader/Loader'; 
 import { useNavigate } from 'react-router-dom';
 
 
@@ -13,7 +13,7 @@ const ReqLoan = () => {
   const [installments, setInstallments] = useState([]);
   const [showPayments, setShowPayments] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [loading, setLoading] = useState(false); // State for loader
+  const [loading, setLoading] = useState(false); 
 
   const calculateInstallments = () => {
     if (!loanAmount || !term) {
@@ -23,11 +23,11 @@ const ReqLoan = () => {
       
     }
 
-    setLoading(true); // Show loader when starting the calculation
+    setLoading(true); 
 
-    // Your actual calculation logic here
+
     setTimeout(() => {
-      // Replace this with your actual calculation logic
+    
       const loanAmountFloat = parseFloat(loanAmount);
       const termInt = parseInt(term);
 
@@ -47,8 +47,8 @@ const ReqLoan = () => {
       setInstallments(installmentsData);
       setShowPayments(true);
       setErrorMessage('');
-      setLoading(false); // Hide loader after the calculation
-    }, 2000); // You can adjust the timeout based on your actual logic
+      setLoading(false); 
+    }, 2000); 
   };
 
   const sendLoanApplication = async () => {
@@ -85,10 +85,10 @@ const ReqLoan = () => {
         }),
       });
 
-      // Handle the response as needed
+
       toast.success('Loan Request is Created');
 
-      // Clear input fields and reset state
+   
       setLoanAmount('');
       setTerm('');
       setInstallments([]);

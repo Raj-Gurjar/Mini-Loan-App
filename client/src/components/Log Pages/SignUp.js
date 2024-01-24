@@ -1,10 +1,9 @@
-// SignUp.js
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import './log.scss';
 import { Link } from 'react-router-dom';
-import Loader from '../Loader/Loader'; // Import the Loader component
+import Loader from '../Loader/Loader'; 
 
 export default function SignUp({ setIsLoggedIn, userType }) {
   const navigate = useNavigate();
@@ -14,19 +13,18 @@ export default function SignUp({ setIsLoggedIn, userType }) {
     password: '',
     isAdmin: userType,
   });
-  const [isLoading, setIsLoading] = useState(false); // Add isLoading state
+  const [isLoading, setIsLoading] = useState(false); 
 
   async function signUpHandler(event) {
-    event.preventDefault(); // Prevents the default form submission behavior
+    event.preventDefault(); 
 
-    // Password length validation
     if (formData.password.length < 8) {
       toast.error('Password must be at least 8 characters long.');
       return;
     }
 
     try {
-      setIsLoading(true); // Set isLoading to true when signing up
+      setIsLoading(true); 
 
       const response = await fetch('http://localhost:4000/api/user/signup', {
         method: 'POST',
@@ -54,14 +52,14 @@ export default function SignUp({ setIsLoggedIn, userType }) {
     } catch (error) {
       console.error('Error during signup:', error);
     } finally {
-      setIsLoading(false); // Set isLoading to false when signup is complete or fails
+      setIsLoading(false); 
     }
   }
 
   function changeHandler(event) {
     const { name, value, checked, type } = event.target;
 
-    // Add password length validation
+  
    
 
     setFormData((prevFormData) => {
@@ -111,7 +109,7 @@ export default function SignUp({ setIsLoggedIn, userType }) {
 
         <button type="submit">Sign Up</button>
 
-        {/* Show the loader if isLoading is true */}
+     
         {isLoading && (
           <div className="loader-container">
             <Loader />

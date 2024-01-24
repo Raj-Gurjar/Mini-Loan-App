@@ -2,12 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import './customer.scss'; // Import your SCSS file
 import { Routes } from 'react-router-dom';
-// import payment from '../../../../../server/models/payment';
 import { useParams } from "react-router-dom";
 import toast from 'react-hot-toast';
 import Loader from '../../Loader/Loader'
 
-// PayLoan component
+
 export default function PayLoan() {
 
     const params = useParams();
@@ -15,7 +14,6 @@ export default function PayLoan() {
     console.log(params);
 
     const [loanRequests, setLoanRequests] = useState([]);
-    const [actionTaken, setActionTaken] = useState({});
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [paymentAmount, setPaymentAmount] = useState("");
     const [repayments, setRepayments] = useState([]);
@@ -58,7 +56,7 @@ export default function PayLoan() {
         setLoading(true);
         try {
 
-            // Fetch loan requests from the API
+
             const response = await fetch(`http://localhost:4000/api/loan/payments/${loanId}`, {
                 method: 'GET',
                 headers: {
@@ -67,7 +65,6 @@ export default function PayLoan() {
                 },
             });
 
-            // Parse the response and set the loan requests in state
             const data = await response.json();
             console.log(data);
 
@@ -87,14 +84,12 @@ export default function PayLoan() {
         try {
             setLoading(true);
             if (parseFloat(amount) > parseFloat(paymentAmount)) {
-                // Display an error toast if the repayment amount is less than the required amount
                 toast.error("Repayment amount should be greater than or equal to the required amount.");
                 return;
             }
 
             closeModal();
 
-            // Update the loan status through the API
             const response = await fetch('http://localhost:4000/api/loan/doPayment', {
                 method: 'POST',
                 headers: {
@@ -107,15 +102,12 @@ export default function PayLoan() {
                 }),
             });
 
-            // Check for successful response
+        
             if (!response.ok) {
                 throw new Error(`Request failed with status: ${response.status}`);
             }
 
-            // Assuming the API sends back the updated payment details after the payment
-            // const updatedPayment = await response.json();
-
-            // console.log("pay front ", updatedPayment);
+          
 
             toast.success("Payment Successful");
             fetchPaymentStatus();
