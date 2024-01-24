@@ -42,7 +42,7 @@ Video Link : https://drive.google.com/file/d/1NenTMsxgBs9zWVANIzoIC14lMPakzNux/v
 ## How to Run the code:
 
 - Should have Nodejs app installed in your system.
-- Should have the MongonDB Atlas/Compass or MONOGO_URL for database storage.
+- Should have the MongonDB Atlas/Compass or MONGO_URL for database storage.
 
 Clone the repository:
 
