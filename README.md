@@ -65,7 +65,7 @@ JWT_SECRET=your_jwt_secret_code
 Set up and run the backend:
 ```
 # Navigate to the backend directory
-cd backend
+cd server
 
 # Install dependencies
 npm install
@@ -77,7 +77,7 @@ npm start
 
 Navigate to the frontend directory:
 ```
-cd frontend
+cd client
 ```
 
 Install dependencies and start the React app:
