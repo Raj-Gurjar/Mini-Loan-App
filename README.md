@@ -8,7 +8,7 @@ This project involves the development of a mini-loan application where authentic
 - Authorization, Authentication (Login, SignUp) with all sort of Error Handling 
 - Light Animations
 - Responsiveness, mobile friendly
-- Dynamic and Clean UI (user of Tailwind with Scss, user of Toasters,Loaders)
+- Dynamic and Clean UI (user of Tailwind with Scss, user of Toasts,Loaders)
 - Clean Folder Structure.
   
 
