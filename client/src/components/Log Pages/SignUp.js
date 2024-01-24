@@ -39,10 +39,14 @@ export default function SignUp({ setIsLoggedIn, userType }) {
       if (response.ok) {
         const res_data = await response.json();
         console.log("res from server", res_data);
-
-        setIsLoggedIn(true);
+         
+        
         toast.success('Account Created Successfully 😊');
-        navigate(userType ? '/admin/dashboard' : '/cust/dashboard');
+        setIsLoggedIn(true);
+        localStorage.setItem("token", res_data.token);
+        localStorage.setItem("user", JSON.stringify(res_data.user));
+        
+        navigate('/login');
       } else {
         const errorMessage = await response.json();
         toast.error(`Signup failed: ${errorMessage.message}`);
@@ -69,8 +73,8 @@ export default function SignUp({ setIsLoggedIn, userType }) {
   }
 
   return (
-    <div className="log-container">
-      <h2>Sign Up</h2>
+    <div className="log-container" data-aos="fade-right" data-dos-delay='10'>
+      <h2 className='log-heading'>Sign Up</h2>
 
       <form className="log-form" onSubmit={signUpHandler}>
         <h4>Sign Up as {(userType === true) ? 'Admin' : 'Customer'}</h4>
@@ -115,8 +119,8 @@ export default function SignUp({ setIsLoggedIn, userType }) {
         )}
 
         <div>
-          <h4>Already Signed Up?</h4>
-          <Link to='/login'><button>Login as {userType ? 'Admin' : 'Customer'}</button></Link>
+          <h5>Already Signed Up?</h5>
+          <Link to='/login'><btn className='btn'>Login as {userType ? 'Admin' : 'Customer'}</btn></Link>
         </div>
       </form>
     </div>

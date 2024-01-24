@@ -1,5 +1,5 @@
 /* loader.scss */
-.loader-container {
+.loader-cntnr {
   position: fixed;
   top: 0;
   left: 0;
@@ -8,14 +8,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  background-color: rgba(68, 67, 67, 0.393); /* Semi-transparent white background */
   z-index: 1000; /* Ensure the loader appears above other content */
 }
 
 .loader {
   width: 48px;
   height: 48px;
-  border: 3px dotted #FFF;
+  border: 4px dotted #000000;
   border-style: solid solid dotted dotted;
   border-radius: 50%;
   display: inline-block;

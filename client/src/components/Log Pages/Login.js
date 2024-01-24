@@ -3,10 +3,14 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate, Link } from 'react-router-dom';
 import './log.scss';
+
 // import { useAuth } from '../Store/Auth';
 import Loader from '../Loader/Loader';
 
-export default function Login({ setIsLoggedIn, userType }) {
+export default function Login({ isLoggedIn, setIsLoggedIn, userType, userId, setUserId }) {
+
+
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
@@ -31,16 +35,21 @@ export default function Login({ setIsLoggedIn, userType }) {
 
       if (response.ok) {
         const res_data = await response.json();
-        console.log("data",res_data.user);
+        console.log("data", res_data.user);
 
-        
+
         localStorage.setItem("token", res_data.token);
-        localStorage.setItem("user",  JSON.stringify(res_data.user));
-       
-        // localStorage.setItem("token", res_data.token);
+        localStorage.setItem("user", JSON.stringify(res_data.user));
+
+
 
         setIsLoggedIn(true);
+
+
+
+
         toast.success('Logged In Successfully 😊');
+       
         navigate(userType ? '/admin/dashboard' : '/cust/dashboard');
       } else {
         const errorMessage = await response.json();
@@ -62,11 +71,11 @@ export default function Login({ setIsLoggedIn, userType }) {
   }
 
   return (
-    <div className="log-container">
-      <h2>Login</h2>
+    <div className="log-container" data-aos="fade-right" data-dos-delay='10'>
+      <h2 className='log-heading'>Login</h2>
 
       <div className="log-form">
-        <h4>Login as {userType === true ? 'Admin' : 'Customer'}</h4>
+        <h4 className='log-type'>Login as {userType === true ? 'Admin' : 'Customer'}</h4>
 
         <label htmlFor="email">Email:</label>
         <input type="email" id="email" name="email" value={formData.email} onChange={changeHandler} required />
@@ -90,10 +99,9 @@ export default function Login({ setIsLoggedIn, userType }) {
           </div>
         )}
 
-        <h4>Not Registered Yet?</h4>
-
+        <h5>Not Registered Yet?</h5>
         <Link to="/signup">
-          <button>SignUp as {userType === true ? 'Admin' : 'Customer'}</button>
+          <btn className='btn'>SignUp As {userType === true ? 'Admin' : 'Customer'}</btn>
         </Link>
       </div>
     </div>

@@ -1,0 +1,279 @@
+//!------------------ Customer DashBoard--------------------
+.customer-dashboard {
+  // max-width: 600px;
+  // margin: auto;
+  padding-top: 100px;
+  text-align: center;
+  padding: 20px;
+  padding-top: 70px;
+}
+
+.dashboard-heading {
+  font-size: 1.8rem;
+
+  margin: 40px 0px;
+}
+
+.cust-btn-cntnr {
+  // display: flex;
+  // justify-content: center;
+  // flex-direction: column;
+  // align-items: center;
+  // gap: 10px;
+
+  .dashboard-button {
+    display: block;
+    width: 50%;
+    margin: auto;
+    padding: 12px;
+    margin-bottom: 10px;
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: #007bffb9;
+    }
+  }
+}
+
+.terms-and-conditions {
+  margin-top: 60px;
+}
+
+.terms-heading {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.terms-text {
+  font-size: 1em;
+  line-height: 1.6;
+  color: #a2a2a2;
+}
+
+//! ----------------Loan Request----------------------------
+
+.loan-container {
+  // height: 100vh;
+  display: flex;
+  flex-direction: row;
+  padding-top: 100px;
+  justify-content: center;
+  align-items: center;
+
+  .loan-form,
+  .payments-container {
+    // max-width: 70%;
+    border: 1px solid #36b3eb;
+    padding: 20px;
+    color: black;
+    background-color: #cad8dbe2;
+    border-radius: 10px;
+    margin: 20px;
+    text-align: center;
+    box-shadow:
+      rgba(0, 0, 0, 0.3) 0px 19px 38px,
+      rgba(0, 0, 0, 0.22) 0px 15px 12px;
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      text-align: center;
+      color: #333;
+    }
+
+    input {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 15px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #e91e63;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #c2185b;
+      }
+    }
+
+    .installments-list {
+      height: 250px;
+
+      // overflow: hidden;
+      overflow-y: scroll;
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          border: 1px solid #ccc;
+          padding: 10px;
+          margin-bottom: 10px;
+          border-radius: 5px;
+        }
+      }
+    }
+
+    p {
+      color: #333;
+    }
+
+    .apply-btn {
+      cursor: pointer;
+      // width: 40%;
+      // height: 40px;
+      margin: 12px;
+      background-color: #1e9fe9;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #1845c2;
+      }
+    }
+  }
+}
+@media screen and (max-width: 750px) {
+  .loan-container {
+    flex-direction: column;
+  }
+}
+
+//!----------------ALL Loans ----------------
+
+.view-loan-container {
+  max-width: 90%;
+  margin: auto;
+  padding: 20px;
+  padding-top: 70px;
+  text-align: center;
+}
+
+.view-loan-heading {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+}
+
+//!----------------Pay Loans ----------------
+
+.payloan {
+  // Your overall styling for the PayLoan component
+  padding-top: 70px;
+  justify-content: center;
+  text-align: center;
+
+  h1 {
+    font-size: 30px;
+  }
+}
+
+//!----------------Pay Model ----------------
+
+.repayment-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  color: black;
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-container {
+    // position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    background: #fff;
+    padding: 8px;
+    width: 60%;
+    max-width: 400px;
+    border-radius: 8px;
+    z-index: 100;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 15px;
+    }
+    input {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 8px;
+      width: 90%;
+      outline: none;
+      margin-bottom: 30px;
+      &:focus {
+        border-color: #36b3eb;
+      }
+    }
+
+    button {
+      background: #36b3eb;
+      color: #fff;
+      font-weight: bold;
+      padding: 8px ;
+      border: none;
+      border-radius: 4px;
+      width: 50%;
+      cursor: pointer;
+      transition: background 0.3s ease;
+
+      &:hover {
+        background: #0a70a0e6;
+      }
+    }
+    .cancel {
+      background: transparent;
+      color: #040404;
+      margin-top: 1rem;
+      cursor: pointer;
+
+      &:hover {
+        color: #8b8989;
+      }
+    }
+  }
+}

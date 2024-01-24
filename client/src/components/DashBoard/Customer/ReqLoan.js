@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './dashboard.scss';
+import './customer.scss';
 import toast from 'react-hot-toast';
 import Loader from '../../Loader/Loader'; // Import the Loader component
 import { useNavigate } from 'react-router-dom';
@@ -19,6 +19,8 @@ const ReqLoan = () => {
     if (!loanAmount || !term) {
       toast.error('Please enter loan amount and term.');
       return;
+
+      
     }
 
     setLoading(true); // Show loader when starting the calculation
@@ -143,7 +145,7 @@ const ReqLoan = () => {
       </div>
 
       <div className="payments-container">
-        <h2>Scheduled Payments</h2>
+        <h2>Installments</h2>
         {loading && <Loader />}
         {showPayments ? (
           <div className="installments-list">
@@ -157,7 +159,7 @@ const ReqLoan = () => {
            
           </div>
         ) : (
-          <p>No payments scheduled yet.</p>
+          <p>No installments to show.</p>
           
         )}
       </div>

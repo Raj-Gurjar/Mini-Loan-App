@@ -1,0 +1,72 @@
+$primaryColor: #007bff;
+$tableBackgroundColor: #4f71c7;
+$cellPadding: 10px;
+
+.App {
+}
+
+.table-cntnr {
+  overflow-x: auto;
+  margin: 10px;
+
+  table {
+    // width: 100px;
+    // background-color: red;
+    // border-collapse: collapse;
+    // margin-top: 10px;
+    // overflow-x: auto;
+    text-align: center;
+    align-items: center;
+
+    width: 90%;
+    display: table;
+    margin: 0 auto;
+
+    vertical-align: center;
+    border-collapse: collapse;
+
+    background: #012b39;
+    border-radius: 0.25em;
+    border-collapse: collapse;
+    margin: 1em;
+
+    th {
+      border-bottom: 1px solid #364043;
+      color: #e2b842;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+    }
+    td {
+      border: 1px solid #e7e7e732;
+      // background-color: rgba(0, 0, 0, 0.3);
+      // background-color: rgba(255, 255, 255, 0.3);
+      padding: 10px;
+      // text-align: left;
+      text-align: center;
+      align-items: center;
+      color: #fff;
+      font-weight: 400;
+      padding: 0.65em 1em;
+    }
+
+    tbody tr {
+      transition: #105469 0.25s ease;
+    }
+    tbody tr:hover {
+      background: #014055;
+    }
+    button
+    {
+       padding: 4px 6px;
+       border-radius: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .table-cntnr {
+    overflow-x: scroll;
+    margin: 3px;
+  }
+}

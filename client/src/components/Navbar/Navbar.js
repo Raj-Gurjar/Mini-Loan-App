@@ -2,10 +2,12 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import toast from 'react-hot-toast';
-// import logo from '../path/to/your/logo.png'; // replace with the actual path to your logo
 import './navbar.scss';
 
-const Navbar = ({ isLoggedIn, setIsLoggedIn, setUserType, userType }) => {
+const Navbar = ({ isLoggedIn, setIsLoggedIn, setUserType, userType, isLn }) => {
+
+
+
     const [menuOpen, setMenuOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -14,10 +16,10 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, setUserType, userType }) => {
 
     return (
         <nav>
-            <div className="nav">
+            <div className="nav" data-aos="zoom-in-down" data-dos-delay='20'>
                 <Link to='/'>
                     <div className="logo">
-                      Mini-Loan
+                        Mini-Loans
                     </div>
                 </Link>
                 <div className={`menu-toggle ${menuOpen ? 'open' : ''}`} onClick={toggleMenu}>
@@ -34,31 +36,32 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, setUserType, userType }) => {
                             <li>
                                 <NavLink to='/about' onClick={() => setMenuOpen(false)}>About</NavLink>
                             </li>
-                            <li>
-                                <NavLink to='/contact' onClick={() => setMenuOpen(false)}>Contact</NavLink>
-                            </li>
+
                         </ul>
                     </div>
                     <div className="auth-section">
-                        {!isLoggedIn &&
+
+                        {!(isLoggedIn) &&
                             <>
-                                {!isLoggedIn &&
-                                    <>
-                                        <Link to='/login' onClick={() => { setUserType(false); setMenuOpen(false); }}>
-                                            <button>Customer Login</button>
-                                        </Link>
-                                        <Link to='/login' onClick={() => { setUserType(true); setMenuOpen(false); }}>
-                                            <button>Admin Login</button>
-                                        </Link>
-                                    </>
-                                }
+                                <Link to='/login' onClick={() => { setUserType(false); setMenuOpen(false); }}>
+                                    <button>Customer Login</button>
+                                </Link>
+                                <Link to='/login' onClick={() => { setUserType(true); setMenuOpen(false); }}>
+                                    <button>Admin Login</button>
+                                </Link>
                             </>
                         }
-                        {isLoggedIn &&
+
+                        {(isLoggedIn) &&
                             <>
                                 <Link to='/' onClick={() => {
+
+                                    localStorage.removeItem("token");
+                                    localStorage.removeItem("user");
+                         
                                     setIsLoggedIn(false);
-                                    toast.success('Logged Out');
+                                 
+                                    toast.success('Logged Out 👋');
                                     setMenuOpen(false);
                                 }}>
                                     <button>Logout</button>
