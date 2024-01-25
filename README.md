@@ -91,6 +91,8 @@ npm start
 ```
 Set up tailwindcss,
 refer: https://tailwindcss.com/docs/guides/create-react-app
+#### And you are done 🥳.
 
-### THANKS FOR READING  😊👋
+
+## THANKS FOR READING  😊👋
 
