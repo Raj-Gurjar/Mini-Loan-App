@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './customer.scss';
 import toast from 'react-hot-toast';
-import Loader from '../../Loader/Loader'; 
+import Loader from '../../Loader/Loader';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -13,21 +13,20 @@ const ReqLoan = () => {
   const [installments, setInstallments] = useState([]);
   const [showPayments, setShowPayments] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
 
   const calculateInstallments = () => {
+
     if (!loanAmount || !term) {
       toast.error('Please enter loan amount and term.');
       return;
-
-      
     }
 
-    setLoading(true); 
+    setLoading(true);
 
 
     setTimeout(() => {
-    
+
       const loanAmountFloat = parseFloat(loanAmount);
       const termInt = parseInt(term);
 
@@ -36,7 +35,8 @@ const ReqLoan = () => {
       const currentDate = new Date();
       const installmentsData = [];
 
-      for (let i = 1; i <= termInt; i++) {
+      for (let i = 1; i <= termInt; i++) 
+      {
         const installment = {
           date: new Date(currentDate.getTime() + i * 7 * 24 * 60 * 60 * 1000),
           amount: (weeklyInstallment + (i <= remainingAmount ? 1 : 0)).toFixed(2),
@@ -47,8 +47,8 @@ const ReqLoan = () => {
       setInstallments(installmentsData);
       setShowPayments(true);
       setErrorMessage('');
-      setLoading(false); 
-    }, 2000); 
+      setLoading(false);
+    }, 2000);
   };
 
   const sendLoanApplication = async () => {
@@ -88,7 +88,7 @@ const ReqLoan = () => {
 
       toast.success('Loan Request is Created');
 
-   
+
       setLoanAmount('');
       setTerm('');
       setInstallments([]);
@@ -113,10 +113,9 @@ const ReqLoan = () => {
 
   return (
     <div className="loan-container">
-      {/* Display loader when loading is true */}
 
       <div className="loan-form">
-        
+
         <label htmlFor="loanAmount">Loan Amount</label>
         <input
           type="number"
@@ -156,11 +155,11 @@ const ReqLoan = () => {
                 </li>
               ))}
             </ul>
-           
+
           </div>
         ) : (
           <p>No installments to show.</p>
-          
+
         )}
       </div>
     </div>

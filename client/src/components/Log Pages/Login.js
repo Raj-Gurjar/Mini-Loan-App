@@ -6,18 +6,18 @@ import './log.scss';
 
 import Loader from '../Loader/Loader';
 
-export default function Login({ isLoggedIn, setIsLoggedIn, userType, userId, setUserId }) {
-
+export default function Login({ setIsLoggedIn, userType}) {
 
 
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
     isAdmin: userType,
   });
-  const [isLoading, setIsLoading] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
 
 
   async function loginHandler() {
@@ -34,8 +34,6 @@ export default function Login({ isLoggedIn, setIsLoggedIn, userType, userId, set
 
       if (response.ok) {
         const res_data = await response.json();
-        console.log("data", res_data.user);
-
 
         localStorage.setItem("token", res_data.token);
         localStorage.setItem("user", JSON.stringify(res_data.user));
@@ -45,6 +43,7 @@ export default function Login({ isLoggedIn, setIsLoggedIn, userType, userId, set
         toast.success('Logged In Successfully 😊');
        
         navigate(userType ? '/admin/dashboard' : '/cust/dashboard');
+        
       } else {
         const errorMessage = await response.json();
         toast.error(`Login failed: ${errorMessage.message}`);

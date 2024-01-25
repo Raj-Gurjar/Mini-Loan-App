@@ -1,13 +1,8 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import './pages.scss'
 
 export default function About() {
-    const navigate = useNavigate();
-
-    function backHandler() {
-        navigate(-1);
-    }
+   
     return (
         <div className='main-container'>
             <h2 className='text-3xl font-bold m-3'>About</h2>

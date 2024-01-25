@@ -5,7 +5,6 @@ import toast from 'react-hot-toast';
 
 const Request = () => {
   const [loanRequests, setLoanRequests] = useState([]);
-  const [actionTaken, setActionTaken] = useState({});
   const [loading, setLoading] = useState(false);
 
   const authToken = localStorage.getItem('token');
@@ -26,8 +25,9 @@ const Request = () => {
       });
 
       const data = await response.json();
-      // console.log(data.loans);
+     
       setLoanRequests(data.loans || []);
+
       setLoading(false);
     } catch (error) {
       console.error('Error fetching loan requests:', error);
@@ -35,7 +35,7 @@ const Request = () => {
   };
 
   const handleStatusChange = async (loanId, newStatus) => {
-    // console.log(loanId, newStatus);
+
     try {
       setLoading(true);
       const response = await fetch('http://localhost:4000/api/loan/update', {
@@ -51,8 +51,8 @@ const Request = () => {
         throw new Error(`Request failed with status: ${response.status}`);
       }
 
-      const data = await response.json();
-      // console.log("data front ", data);
+      
+
       fetchLoanRequests();
       toast.success("Loan Updated Successfully");
 
