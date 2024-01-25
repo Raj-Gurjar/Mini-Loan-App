@@ -20,9 +20,9 @@ Video Link : https://drive.google.com/file/d/1NenTMsxgBs9zWVANIzoIC14lMPakzNux/v
 
 - **Frontend**: React.js
 - **Backend**: Node.js (Express)
-- Database: MongoDB
-- Styling: TailwindCSS, Scss
-- API Testing: POSTMAN
+- **Database**: MongoDB
+- **Styling**: TailwindCSS, Scss
+- **API Testing**: POSTMAN
 
 ## Project Folder Structure
 
