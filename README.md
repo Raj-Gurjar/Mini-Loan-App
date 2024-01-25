@@ -42,7 +42,7 @@ Video Link : https://drive.google.com/file/d/1NenTMsxgBs9zWVANIzoIC14lMPakzNux/v
 ## How to Run the code:
 
 - Should have Nodejs app installed in your system.
-- Should have the MongonDB Atlas/Compass or MONOGO_URL for database storage.
+- Should have the MongonDB Atlas/Compass or MONGO_URL for database storage.
 
 Clone the repository:
 
@@ -65,7 +65,7 @@ JWT_SECRET=your_jwt_secret_code
 Set up and run the backend:
 ```
 # Navigate to the backend directory
-cd backend
+cd server
 
 # Install dependencies
 npm install
@@ -77,7 +77,7 @@ npm start
 
 Navigate to the frontend directory:
 ```
-cd frontend
+cd client
 ```
 
 Install dependencies and start the React app:
@@ -91,6 +91,8 @@ npm start
 ```
 Set up tailwindcss,
 refer: https://tailwindcss.com/docs/guides/create-react-app
+#### And you are done 🥳.
 
-### THANKS FOR READING  😊👋
+
+## THANKS FOR READING  😊👋
 
