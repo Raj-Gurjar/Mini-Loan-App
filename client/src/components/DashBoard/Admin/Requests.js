@@ -106,11 +106,11 @@ const Request = () => {
                     {(request.state === "PENDING") ? (
                       <>
                         <button onClick={() => handleStatusChange(request._id, 'APPROVED')}
-                          className='bg-green-500 p-[3px] mx-[3px] relative inline-flex items-center justify-start inline-block px-3 py-1 overflow-hidden font-medium transition-all rounded-full hover:bg-white group'>
+                          className='bg-green-500 text-black-500 p-[3px] mx-[3px] relative inline-flex items-center justify-start inline-block px-3 py-1 overflow-hidden font-medium transition-all rounded-full hover:bg-white group'>
                           Approve
                         </button>
                         <button onClick={() => handleStatusChange(request._id, 'REJECTED')}
-                          className='bg-red-500 p-[3px] mx-[3px] relative inline-flex items-center justify-start inline-block px-3 py-1 overflow-hidden font-medium transition-all rounded-full hover:bg-white group'>
+                          className='bg-red-500 text-black-500 p-[3px] mx-[3px] relative inline-flex items-center justify-start inline-block px-3 py-1 overflow-hidden font-medium transition-all rounded-full hover:bg-white group'>
                           Reject
                         </button>
                       </>
