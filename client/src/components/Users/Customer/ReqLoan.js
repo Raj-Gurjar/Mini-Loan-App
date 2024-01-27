@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './customer.scss';
 import toast from 'react-hot-toast';
 import Loader from '../../Loader/Loader';
 import { useNavigate } from 'react-router-dom';
+import GlobalContext from '../../../Context/GlobalContext';
 
 
 const ReqLoan = () => {
 
+
+  const { createLoanApi } = useContext(GlobalContext)
   const navigate = useNavigate();
   const [loanAmount, setLoanAmount] = useState('');
   const [term, setTerm] = useState('');
@@ -21,6 +24,11 @@ const ReqLoan = () => {
       toast.error('Please enter loan amount and term.');
       return;
     }
+    // if (term > 20) {
+    //   toast.error('Terms can not be greater than 20');
+    //   return;
+    // }
+
 
     setLoading(true);
 
@@ -35,8 +43,7 @@ const ReqLoan = () => {
       const currentDate = new Date();
       const installmentsData = [];
 
-      for (let i = 1; i <= termInt; i++) 
-      {
+      for (let i = 1; i <= termInt; i++) {
         const installment = {
           date: new Date(currentDate.getTime() + i * 7 * 24 * 60 * 60 * 1000),
           amount: (weeklyInstallment + (i <= remainingAmount ? 1 : 0)).toFixed(2),
@@ -65,13 +72,18 @@ const ReqLoan = () => {
       setLoading(false);
       return;
     }
+    // if (term > 20) {
+    //   toast.error('Terms can not be greater than 20');
+    //   return;
+    // }
+
 
     const authToken = localStorage.getItem('token');
     const User = localStorage.getItem('user');
     const user = JSON.parse(User);
 
     try {
-      const response = await fetch('http://localhost:4000/api/loan/createLoan', {
+      const response = await fetch(`${createLoanApi}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -125,7 +137,7 @@ const ReqLoan = () => {
           required
         />
 
-        <label htmlFor="term">Term (in weeks)</label>
+        <label htmlFor="term">Term/Installments (in weeks)</label>
         <input
           type="number"
           id="term"

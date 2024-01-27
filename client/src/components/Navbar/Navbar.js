@@ -1,13 +1,23 @@
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import './navbar.scss';
-
-const Navbar = ({ isLoggedIn, setIsLoggedIn, setUserType, userType }) => {
-
+import GlobalContext from '../../Context/GlobalContext';
 
 
+const Navbar = () => {
+
+
+    const {isLoggedIn, setIsLoggedIn,userType,setUserType} = useContext(GlobalContext);
+    // const setIsLoggedIn = useContext(GlobalContext);
+
+
+    // const userType = useContext(GlobalContext);
+    // const setUserType = useContext(GlobalContext);
+
+   console.log('log nav',isLoggedIn);
+   
     const [menuOpen, setMenuOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -58,9 +68,9 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, setUserType, userType }) => {
 
                                     localStorage.removeItem("token");
                                     localStorage.removeItem("user");
-                         
+
                                     setIsLoggedIn(false);
-                                 
+
                                     toast.success('Logged Out 👋');
                                     setMenuOpen(false);
                                 }}>

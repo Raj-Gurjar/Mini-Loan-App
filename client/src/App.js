@@ -6,49 +6,37 @@ import About from './Pages/About';
 import Navbar from './components/Navbar/Navbar';
 import Login from './components/Log Pages/Login';
 import SignUp from './components/Log Pages/SignUp';
-import AdminHome from './components/DashBoard/Admin/Requests';
-import CustHome from './components/DashBoard/Customer/CustHome';
-import CustReq from './components/DashBoard/Customer/ReqLoan'
-import CustView from './components/DashBoard/Customer/ViewLoan';
-import PayLoan from './components/DashBoard/Customer/PayLoan';
+import AdminHome from './components/Users/Admin/Requests';
+import CustHome from './components/Users/Customer/CustHome';
+import CustReq from './components/Users/Customer/ReqLoan'
+import CustView from './components/Users/Customer/ViewLoan';
+import PayLoan from './components/Users/Customer/PayLoan';
 
-import AOS from 'aos';
-import 'aos/dist/aos.css';
 
-import { useState,useEffect } from 'react';
+
 
 function App() {
 
 
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [userType, setUserType] = useState(false);
-
-    
-
-
-    useEffect(() => {
-        AOS.init({
-            duration: 1000, 
-        });
-    }, []);
-
 
     return (
 
         <div className="App">
+            {/* <GlobalContext.Provider value={{ isLoggedIn, setIsLoggedIn, userType, setUserType }}> */}
 
-            <Navbar setUserType={setUserType} userType={userType} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+
+            <Navbar />
 
             <Routes>
 
 
-                <Route index element={<Home/>} />
+                <Route index element={<Home />} />
 
                 <Route path='/about' element={<About />} />
 
-                <Route path='/login' element={<Login userType={userType} setIsLoggedIn={setIsLoggedIn} />} />
-                <Route path='/signup' element={<SignUp userType={userType} setIsLoggedIn={setIsLoggedIn}/>} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/signup' element={<SignUp />} />
 
                 <Route path='/admin/dashboard' element={<AdminHome />} />
                 <Route path='/cust/dashboard' element={<CustHome />} />
@@ -57,7 +45,7 @@ function App() {
                 <Route path='/cust/dashboard/payloan/:id' element={<PayLoan />} />
 
                 <Route path='*' element={<div className='text-2xl'>404 Site Not found</div>} />
-               
+
 
             </Routes>
 

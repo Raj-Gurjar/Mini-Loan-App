@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import './admin.scss';
 import Loader from '../../Loader/Loader';
 import toast from 'react-hot-toast';
+import GlobalContext from '../../../Context/GlobalContext';
 
 const Request = () => {
   const [loanRequests, setLoanRequests] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const authToken = localStorage.getItem('token');
+
+  
+  const {allLoansApi,updateLoansApi} = useContext(GlobalContext);
 
   useEffect(() => {
     fetchLoanRequests();
@@ -16,7 +20,7 @@ const Request = () => {
   const fetchLoanRequests = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:4000/api/loan/allLoans', {
+      const response = await fetch(`${allLoansApi}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -38,7 +42,7 @@ const Request = () => {
 
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:4000/api/loan/update', {
+      const response = await fetch(`${updateLoansApi}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

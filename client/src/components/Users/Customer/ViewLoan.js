@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import './customer.scss';
 
 import { useNavigate } from 'react-router-dom';
 
 import Loader from '../../Loader/Loader';
+import GlobalContext from '../../../Context/GlobalContext';
 
 const ViewLoan = () => {
+
+  
+  const {viewLoanApi} = useContext(GlobalContext)
   const navigate = useNavigate();
   const [loans, setLoans] = useState([]);
   const [error, setError] = useState(null);
@@ -22,7 +26,7 @@ const ViewLoan = () => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:4000/api/loan/loans/${user._id}`, {
+      const response = await fetch(`${viewLoanApi}${user._id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -76,7 +80,7 @@ const ViewLoan = () => {
                   <tr key={loan._id}>
           
                     <td>{index + 1}.</td>
-                    <td>${loan.amount}</td>
+                    <td>Rs. {loan.amount}</td>
                     <td>{loan.term} weeks</td>
                     <td>{(loan.state === "PENDING") &&
                       (<span className='text-blue-500'>PENDING</span>)

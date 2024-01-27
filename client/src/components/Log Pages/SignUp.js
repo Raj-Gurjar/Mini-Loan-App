@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState ,useContext} from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import './log.scss';
 import { Link } from 'react-router-dom';
-import Loader from '../Loader/Loader'; 
+import Loader from '../Loader/Loader';
+import GlobalContext from '../../Context/GlobalContext';
 
-export default function SignUp({ setIsLoggedIn, userType }) {
+export default function SignUp() {
+
+  const { setIsLoggedIn, userType,signUpApi } = useContext(GlobalContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
@@ -13,10 +16,10 @@ export default function SignUp({ setIsLoggedIn, userType }) {
     password: '',
     isAdmin: userType,
   });
-  const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
 
   async function signUpHandler(event) {
-    event.preventDefault(); 
+    event.preventDefault();
 
     if (formData.password.length < 8) {
       toast.error('Password must be at least 8 characters long.');
@@ -24,9 +27,9 @@ export default function SignUp({ setIsLoggedIn, userType }) {
     }
 
     try {
-      setIsLoading(true); 
+      setIsLoading(true);
 
-      const response = await fetch('http://localhost:4000/api/user/signup', {
+      const response = await fetch( `${signUpApi}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -37,13 +40,13 @@ export default function SignUp({ setIsLoggedIn, userType }) {
       if (response.ok) {
         const res_data = await response.json();
         console.log("res from server", res_data);
-         
-        
+
+
         toast.success('Account Created Successfully 😊');
         setIsLoggedIn(true);
         localStorage.setItem("token", res_data.token);
         localStorage.setItem("user", JSON.stringify(res_data.user));
-        
+
         navigate('/login');
       } else {
         const errorMessage = await response.json();
@@ -52,15 +55,15 @@ export default function SignUp({ setIsLoggedIn, userType }) {
     } catch (error) {
       console.error('Error during signup:', error);
     } finally {
-      setIsLoading(false); 
+      setIsLoading(false);
     }
   }
 
   function changeHandler(event) {
     const { name, value, checked, type } = event.target;
 
-  
-   
+
+
 
     setFormData((prevFormData) => {
       return {
@@ -109,7 +112,7 @@ export default function SignUp({ setIsLoggedIn, userType }) {
 
         <button type="submit">Sign Up</button>
 
-     
+
         {isLoading && (
           <div className="loader-container">
             <Loader />

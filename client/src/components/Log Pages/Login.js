@@ -1,13 +1,26 @@
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate, Link } from 'react-router-dom';
 import './log.scss';
 
 import Loader from '../Loader/Loader';
+import GlobalContext from '../../Context/GlobalContext';
 
-export default function Login({ setIsLoggedIn, userType}) {
 
+export default function Login() {
+
+
+  const {setIsLoggedIn,userType,logInApi} = useContext(GlobalContext);
+  
+  console.log("log",setIsLoggedIn)
+  console.log("log",userType);
+  
+  
+  // const {userType} = useContext(GlobalContext);
+  // const setUserType = useContext(GlobalContext);
+
+  
 
   const navigate = useNavigate();
 
@@ -24,7 +37,7 @@ export default function Login({ setIsLoggedIn, userType}) {
     try {
       setIsLoading(true);
 
-      const response = await fetch('http://localhost:4000/api/user/signin', {
+      const response = await fetch(`${logInApi}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -41,9 +54,9 @@ export default function Login({ setIsLoggedIn, userType}) {
         setIsLoggedIn(true);
 
         toast.success('Logged In Successfully 😊');
-       
+
         navigate(userType ? '/admin/dashboard' : '/cust/dashboard');
-        
+
       } else {
         const errorMessage = await response.json();
         toast.error(`Login failed: ${errorMessage.message}`);

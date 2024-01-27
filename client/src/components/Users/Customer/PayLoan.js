@@ -1,14 +1,17 @@
 // Import necessary React and styling modules
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect ,useContext} from 'react';
 import './customer.scss'; // Import your SCSS file
-import { Routes } from 'react-router-dom';
+// import { Routes } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 import toast from 'react-hot-toast';
 import Loader from '../../Loader/Loader'
+import GlobalContext from '../../../Context/GlobalContext';
 
 
 export default function PayLoan() {
 
+
+    const {viewPaymentApi,payLoanApi} = useContext(GlobalContext)
     const params = useParams();
     const loanId = params.id;
     console.log(params);
@@ -57,7 +60,7 @@ export default function PayLoan() {
         try {
 
 
-            const response = await fetch(`http://localhost:4000/api/loan/payments/${loanId}`, {
+            const response = await fetch(`${viewPaymentApi}${loanId}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -90,7 +93,7 @@ export default function PayLoan() {
 
             closeModal();
 
-            const response = await fetch('http://localhost:4000/api/loan/doPayment', {
+            const response = await fetch(`${payLoanApi}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
