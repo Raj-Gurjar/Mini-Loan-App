@@ -23,9 +23,7 @@ function App() {
     return (
 
         <div className="App">
-            {/* <GlobalContext.Provider value={{ isLoggedIn, setIsLoggedIn, userType, setUserType }}> */}
-
-
+           
             <Navbar />
 
             <Routes>

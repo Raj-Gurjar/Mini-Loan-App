@@ -18,18 +18,18 @@ const GlobalContextProvider = ({ children }) => {
     const [userType, setUserType] = useState(false);
 
     const PORT = 4000
-    const PORT_add = `http://localhost:${PORT}/api`
+    const PORT_Url = `http://localhost:${PORT}/api`
 
-    const logInApi = `${PORT_add}/user/signin`
-    const signUpApi = `${PORT_add}/user/signup`
+    const logInApi = `${PORT_Url}/user/signin`
+    const signUpApi = `${PORT_Url}/user/signup`
 
-    const allLoansApi = `${PORT_add}/loan/allLoans`
-    const updateLoansApi = `${PORT_add}/loan/update`
+    const allLoansApi = `${PORT_Url}/loan/allLoans`
+    const updateLoansApi = `${PORT_Url}/loan/update`
 
-    const createLoanApi = `${PORT_add}/loan/createLoan`
-    const viewPaymentApi = `${PORT_add}/loan/payments/`
-    const payLoanApi = `${PORT_add}/loan/doPayment`
-    const viewLoanApi = `${PORT_add}/loan/loans/`
+    const createLoanApi = `${PORT_Url}/loan/createLoan`
+    const viewPaymentApi = `${PORT_Url}/loan/payments/`
+    const payLoanApi = `${PORT_Url}/loan/doPayment`
+    const viewLoanApi = `${PORT_Url}/loan/loans/`
 
 
 
