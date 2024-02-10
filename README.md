@@ -1,5 +1,5 @@
 
-# TechDome Solutions Mini-Loan App
+# Mini-Loan App
 Welcome to the TechDome Solutions Mini-Loan App project! 😊
 
 ## Overview
