@@ -26,8 +26,8 @@ Video Link : https://drive.google.com/file/d/1NenTMsxgBs9zWVANIzoIC14lMPakzNux/v
 
 ## Project Folder Structure
 
-- **client** : Contains all Frontend Code with UI and Styling.
-- **server** :  Contains all Backend Code with UI and Styling.
+- **client** : Contains all Frontend Code.
+- **server** :  Contains all Backend Code.
 - **README.md**: README.md, including information for reviewers to run and use the app.
 
 
