@@ -4,6 +4,9 @@ Welcome to the Mini-Loan App project! 😊
 
 ## Overview
 This project involves the development of a mini-loan application where authenticated users can apply for loans, authenticated admins can approve or reject loans, and users can manage their loan repayments.
+
+## 🔗 Live link : https://mini-loan-webapp.vercel.app/
+
 ### Extra Features
 - Authorization, Authentication (Login, SignUp) with all sort of Error Handling 
 - Light Animations
