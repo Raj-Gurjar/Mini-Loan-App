@@ -18,7 +18,7 @@ const GlobalContextProvider = ({ children }) => {
     const [userType, setUserType] = useState(false);
 
     const PORT = 4000
-    const PORT_Url = `http://localhost:${PORT}/api`
+    const PORT_Url = `https://mini-loan-app-bkd.vercel.app/api`
 
     const logInApi = `${PORT_Url}/user/signin`
     const signUpApi = `${PORT_Url}/user/signup`
@@ -40,7 +40,7 @@ const GlobalContextProvider = ({ children }) => {
             logInApi, signUpApi,
 
             allLoansApi, updateLoansApi,
-            createLoanApi,viewLoanApi,viewPaymentApi,payLoanApi,
+            createLoanApi, viewLoanApi, viewPaymentApi, payLoanApi,
 
         }}>
             {children}
