@@ -2,6 +2,7 @@
 .main-container {
   // max-width: 1200px;
   // margin: 0 auto;
+ 
   padding: 20px;
   padding-top: 70px;
   display: flex;
@@ -34,8 +35,8 @@
   justify-content: space-around;
 
   .feature {
-    width: 40%;
-    // max-width: 300px;
+    // width: auto;
+    min-width: 60%;
     margin: 20px;
     padding: 20px 30px;
     border: 1px solid #c0c0c083;
