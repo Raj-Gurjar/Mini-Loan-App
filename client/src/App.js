@@ -11,6 +11,7 @@ import CustHome from './components/Users/Customer/CustHome';
 import CustReq from './components/Users/Customer/ReqLoan'
 import CustView from './components/Users/Customer/ViewLoan';
 import PayLoan from './components/Users/Customer/PayLoan';
+import Error from './components/Error';
 
 
 
@@ -42,7 +43,7 @@ function App() {
                 <Route path='/cust/dashboard/viewloan' element={<CustView />} />
                 <Route path='/cust/dashboard/payloan/:id' element={<PayLoan />} />
 
-                <Route path='*' element={<div className='text-2xl'>404 Site Not found</div>} />
+                <Route path='*' element={<Error/>} />
 
 
             </Routes>
