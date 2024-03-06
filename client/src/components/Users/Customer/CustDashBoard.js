@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link,Outlet } from 'react-router-dom';
 import './customer.scss';
+
 
 const CustHome = () => {
   return (
@@ -11,11 +12,11 @@ const CustHome = () => {
 
       <div className="cust-btn-cntnr" data-aos="fade-right" data-dos-delay='10'>
 
-        <Link to="/cust/dashboard/reqloan">
+        <Link to="/cust/reqloan">
           <button className="dashboard-button">Apply for New Loan</button>
         </Link>
 
-        <Link to="/cust/dashboard/viewloan">
+        <Link to="/cust/viewloan">
           <button className="dashboard-button">View All Loans</button>
         </Link>
       </div>
@@ -27,7 +28,7 @@ const CustHome = () => {
           venenatis ultricies. Phasellus ut nulla vitae turpis ultrices accumsan.
         </p>
       </div>
-
+   
     </div>
   );
 };

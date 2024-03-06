@@ -1,7 +1,7 @@
 import React, { useState, useEffect,useContext } from 'react';
 import './customer.scss';
 
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 import Loader from '../../Loader/Loader';
 import GlobalContext from '../../../Context/GlobalContext';
@@ -50,7 +50,7 @@ const ViewLoan = () => {
     }
   };
   const handlePayButtonClick = (loanId) => {
-    navigate(`/cust/dashboard/payloan/${loanId}`);
+    navigate(`/cust/viewloan/payloan/${loanId}`);
   };
   return (
     <div className="view-loan-container">
@@ -124,6 +124,7 @@ const ViewLoan = () => {
           </div>
         )
       }
+      <Outlet/>
     </div>
   );
 };

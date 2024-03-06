@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Outlet } from 'react-router-dom';
 import './App.scss';
 
 import Home from './Pages/Home';
@@ -7,7 +7,7 @@ import Navbar from './components/Navbar/Navbar';
 import Login from './components/Log Pages/Login';
 import SignUp from './components/Log Pages/SignUp';
 import AdminHome from './components/Users/Admin/Requests';
-import CustHome from './components/Users/Customer/CustHome';
+import CustDashBoard from './components/Users/Customer/CustDashBoard';
 import CustReq from './components/Users/Customer/ReqLoan'
 import CustView from './components/Users/Customer/ViewLoan';
 import PayLoan from './components/Users/Customer/PayLoan';
@@ -38,10 +38,13 @@ function App() {
 
                 <Route path='/admin/dashboard' element={<ProtectedRoute Component={AdminHome} />} />
 
-                <Route path='/cust/dashboard' element={<ProtectedRoute Component={CustHome} />} />
-                <Route path='/cust/dashboard/reqloan' element={<ProtectedRoute Component={CustReq} />} />
-                <Route path='/cust/dashboard/viewloan' element={<ProtectedRoute Component={CustView} />} />
-                <Route path='/cust/dashboard/payloan/:id' element={<ProtectedRoute Component={PayLoan} />} />
+
+                <Route path='/cust' element={<ProtectedRoute Component={Outlet} />} >
+                    <Route index path='dashboard' element={<CustDashBoard />} />
+                    <Route path='reqloan' element={<CustReq />} />
+                    <Route path='viewloan' element={<CustView />} />
+                    <Route path='viewloan/payloan/:id' element={<PayLoan />} />
+                </Route>
 
                 <Route path='*' element={<Error />} />
 
