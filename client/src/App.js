@@ -12,23 +12,21 @@ import CustReq from './components/Users/Customer/ReqLoan'
 import CustView from './components/Users/Customer/ViewLoan';
 import PayLoan from './components/Users/Customer/PayLoan';
 import Error from './components/Error';
-
-
-
+import ProtectedRoute from './components/ProtectedRoute';
+import GlobalContext from './Context/GlobalContext';
+import { useContext } from 'react';
 
 function App() {
 
-
-
+    const { isLoggedIn, setIsLoggedIn, userType, setUserType } = useContext(GlobalContext);
 
     return (
 
         <div className="App">
-           
+
             <Navbar />
 
             <Routes>
-
 
                 <Route index element={<Home />} />
 
@@ -37,13 +35,15 @@ function App() {
                 <Route path='/login' element={<Login />} />
                 <Route path='/signup' element={<SignUp />} />
 
-                <Route path='/admin/dashboard' element={<AdminHome />} />
-                <Route path='/cust/dashboard' element={<CustHome />} />
-                <Route path='/cust/dashboard/reqloan' element={<CustReq />} />
-                <Route path='/cust/dashboard/viewloan' element={<CustView />} />
-                <Route path='/cust/dashboard/payloan/:id' element={<PayLoan />} />
 
-                <Route path='*' element={<Error/>} />
+                <Route path='/admin/dashboard' element={<ProtectedRoute Component={AdminHome} />} />
+
+                <Route path='/cust/dashboard' element={<ProtectedRoute Component={CustHome} />} />
+                <Route path='/cust/dashboard/reqloan' element={<ProtectedRoute Component={CustReq} />} />
+                <Route path='/cust/dashboard/viewloan' element={<ProtectedRoute Component={CustView} />} />
+                <Route path='/cust/dashboard/payloan/:id' element={<ProtectedRoute Component={PayLoan} />} />
+
+                <Route path='*' element={<Error />} />
 
 
             </Routes>
