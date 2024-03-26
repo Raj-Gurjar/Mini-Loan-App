@@ -6,15 +6,15 @@ module.exports = async (req, res, next) => {
     const { authorization } = req.headers;
     if (!authorization) {
       return res.status(401).json({
-        error: "you must be logged in",
+        error: "You must be logged in !!",
       });
     }
-    const token = authorization.replace("Bearer ", "");
+    const token  = authorization.replace("Bearer ", "");
     const payload = jwt.verify(token, process.env.JWT_SECRET);
 
     if (!payload) {
       return res.status(401).json({
-        error: "you must be logged in",
+        error: "You must be logged in !!",
       });
     }
 
@@ -32,7 +32,7 @@ module.exports = async (req, res, next) => {
   } catch (error) {
     console.log(error);
     return res.status(500).json({
-      message: "Internal server error",
+      message: "Internal server error !!",
       error,
     });
   }

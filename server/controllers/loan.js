@@ -23,7 +23,7 @@ exports.createLoan = async (req, res) => {
   try {
     const { userId, amount, term, payments } = req.body;
     const user = req.user;
-    console.log(payments);
+    // console.log(payments);
 
     if (user.isAdmin) {
       return res.status(401).json({
@@ -56,7 +56,7 @@ exports.getAllLoans = async (req, res) => {
       path: "userId",
       select: "name email isAdmin",
     });
-
+ 
     return res.status(200).json({
       success: true,
       message: "success!",
@@ -192,16 +192,16 @@ exports.updateState = async (req, res) => {
     }
 
     loan.state = state;
-    console.log("state bk", state);
+    // console.log("state bk", state);
 
 
     await loan.save();
-    console.log("loanbk", loan);
+    // console.log("loanbk", loan);
     return res.status(200).json({
       success: true,
       message: "Loan state updated successfully!",
     });
-    console.log("Error ! in updating Status by Admin");
+    // console.log("Error ! in updating Status by Admin");
   } catch (error) {
     return res.status(500).json({
       success: false,

@@ -10,7 +10,7 @@ exports.register = async (req, res) => {
     const { name, email, password, isAdmin } = req.body;
 
 
-    console.log('sign up data: ', req.body);
+    // console.log('sign up data: ', req.body);
 
 
     if (!name || !email || !password) {
@@ -60,7 +60,7 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
 
 
-  console.log('login data: ', req.body);
+  // console.log('login data: ', req.body);
   try {
     const { email, password, isAdmin } = req.body;
 
