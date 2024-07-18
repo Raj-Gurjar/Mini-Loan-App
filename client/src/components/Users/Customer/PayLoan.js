@@ -14,7 +14,7 @@ export default function PayLoan() {
     const {viewPaymentApi,payLoanApi} = useContext(GlobalContext)
     const params = useParams();
     const loanId = params.id;
-    console.log(params);
+    // console.log(params);
 
     const [loanRequests, setLoanRequests] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);

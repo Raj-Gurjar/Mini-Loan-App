@@ -38,7 +38,6 @@ function App() {
 
                 <Route path='/admin/dashboard' element={<ProtectedRoute Component={AdminHome} />} />
 
-
                 <Route path='/cust' element={<ProtectedRoute Component={Outlet} />} >
                     <Route index path='dashboard' element={<CustDashBoard />} />
                     <Route path='reqloan' element={<CustReq />} />
